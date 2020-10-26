@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/25 18:00:30 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/26 15:56:35 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,35 @@
 
 void	ft_print_args(t_all *all)
 {
-	printf("num_philos = %d\n", all->philo_num);
+	printf(GREEN"num_philos = %d\n", all->philo_num);
 	printf("time to die = %d\n", all->time_to_die);
 	printf("time to eat = %d\n", all->time_to_eat);
-	printf("time to sleep = %d\n", all->time_to_sleep);
+	printf("time to sleep = %d\n"ENDCOLOR, all->time_to_sleep);
 	if (all->eat_count > 0)
-		printf("eat count = %d\n", all->eat_count);
+		printf(GREEN"eat count = %d\n"ENDCOLOR, all->eat_count);
+}
+
+void	ft_table_init(t_table *table, int size)
+{
+	int		i;
+
+	i = -1;
+	table->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * size);
+	while (++i < size)
+		pthread_mutex_init(&table->forks[i], NULL);
+}
+
+void	ft_philos_init(t_all *all)
+{
+	int		i;
+
+	i = -1;
+	all->philos = (t_philo *)malloc(sizeof(t_philo) * all->philo_num);
+	while (++i < all->philo_num)
+	{
+		all->philos[i].tag = i + 1;
+		all->philos[i].eat_num = 0;
+	}
 }
 
 int		main(int argc, char **argv)
@@ -49,11 +72,9 @@ int		main(int argc, char **argv)
 	t_all	all;
 
 	ft_init(&all);
-	if (!ft_parse(argc, argv, &all))
-	{
-		ft_putstr(RED"Error\nWrong input parameters!\n"ENDCOLOR);
+	if (ft_parse(argc, argv, &all))
 		return (1);
-	}
 	ft_print_args(&all); // TEMP
+	ft_table_init(&all.table, all.philo_num);
 	return (0);
 }
