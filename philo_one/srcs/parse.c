@@ -6,11 +6,21 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:35:02 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/30 20:21:09 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/30 20:39:30 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+void	ft_init(t_table *table)
+{
+	table->philo_num = 0;
+	table->time_to_die = 0;
+	table->time_to_eat = 0;
+	table->time_to_sleep = 0;
+	table->eat_count = -1;
+	table->died = -1;
+}
 
 int		ft_parse(int argc, char **argv, t_table *table)
 {

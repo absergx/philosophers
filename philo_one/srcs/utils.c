@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:21:00 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/30 20:22:53 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/30 20:39:24 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,6 @@ void	ft_putstr(char *str)
 	while (str[i])
 		++i;
 	write(1, str, i);
-}
-
-void	ft_init(t_table *table)
-{
-	table->philo_num = 0;
-	table->time_to_die = 0;
-	table->time_to_eat = 0;
-	table->time_to_sleep = 0;
-	table->eat_count = -1;
-	table->died = -1;
 }
 
 int		ft_atou(char *str)

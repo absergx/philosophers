@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:23:51 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/30 20:19:54 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/30 20:40:04 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef struct		s_all
 **		parse.c
 */
 
-int					ft_parse(int argc, char **argv, t_all *all);
+int					ft_parse(int argc, char **argv, t_table *table);
+void				ft_init(t_table *table);
 
 /*
 **		utils.c
@@ -58,7 +59,6 @@ int					ft_parse(int argc, char **argv, t_all *all);
 
 int					ft_print_error(char *str, char *value);
 void				ft_putstr(char *str);
-void				ft_init(t_all *all);
 int					ft_atou(char *str);
 
 #endif

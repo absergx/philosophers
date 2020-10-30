@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/30 20:24:22 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/30 20:41:07 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@
 **		- To avoid philosophers duplicating forks, you should protect the \
 **		forks state with a mutex for each of them.
 **		- Each philosopher should be a thread.
+**
+**	Forks handling:
+**		pthread_mutex_lock(&all->table.fork[i])
+**		pthread_mutex_lock(&all->table.fork[(i + 1) % all->philo_num])
+**	блокировка двух вилок с учетом, что последний берет первую вилку
 */
 
 void	ft_print_args(t_table *table)
@@ -54,13 +59,6 @@ void	ft_table_init(t_table *table)
 	while (++i < table->philo_num)
 		pthread_mutex_init(&table->forks[i], NULL);
 }
-
-/*
-**	pthread_mutex_lock(&all->table.fork[i])
-**	pthread_mutex_lock(&all->table.fork[(i + 1) % all->philo_num])
-**	блокировка двух вилок с учетом, что последний берет первую вилку
-**	!!!с одним философом может не работать!!!
-*/
 
 int		main(int argc, char **argv)
 {
