@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:21:00 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/26 15:27:15 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/26 22:19:44 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_init(t_all *all)
 
 int		ft_atou(char *str)
 {
-	int		res;
+	long	res;
 	int		i;
 
 	i = 0;
@@ -66,6 +66,8 @@ int		ft_atou(char *str)
 	{
 		res *= 10;
 		res += str[i] - '0';
+		if (res > 2147483647)
+			break ;
 		++i;
 	}
 	return (str[i] == '\0' ? res : -1);

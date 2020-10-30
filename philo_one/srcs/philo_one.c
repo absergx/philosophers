@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/26 15:56:35 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/30 17:18:45 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,22 @@ void	ft_print_args(t_all *all)
 
 void	ft_table_init(t_table *table, int size)
 {
-	int		i;
+	int				i;
+	pthread_mutex_t	forks[size];
 
 	i = -1;
-	table->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * size);
+	table->forks = forks;
 	while (++i < size)
 		pthread_mutex_init(&table->forks[i], NULL);
 }
 
 void	ft_philos_init(t_all *all)
 {
-	int		i;
+	int				i;
+	t_philo			philos[all->philo_num];
 
 	i = -1;
-	all->philos = (t_philo *)malloc(sizeof(t_philo) * all->philo_num);
+	all->philos = philos;
 	while (++i < all->philo_num)
 	{
 		all->philos[i].tag = i + 1;
@@ -67,14 +69,22 @@ void	ft_philos_init(t_all *all)
 	}
 }
 
+/*
+**	pthread_mutex_lock(&all->table.fork[i])
+**	pthread_mutex_lock(&all->table.fork[(i + 1) % all->philo_num])
+**	блокировка двух вилок с учетом, что последний берет первую вилку
+**	!!!с одним философом может не работать!!!
+*/
+
 int		main(int argc, char **argv)
 {
-	t_all	all;
+	t_all			all;
 
 	ft_init(&all);
 	if (ft_parse(argc, argv, &all))
 		return (1);
 	ft_print_args(&all); // TEMP
 	ft_table_init(&all.table, all.philo_num);
+	free(all.table.forks);
 	return (0);
 }
