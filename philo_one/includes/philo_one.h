@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:23:51 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/26 15:54:13 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/30 20:19:54 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,25 @@
 
 typedef struct		s_table
 {
+	int				philo_num;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_count;
+	int				died;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	output_mutex;
 	pthread_mutex_t	time_mutex;
 }					t_table;
 
-typedef struct		s_philo
-{
-	int				tag;
-	int				eat_num;
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
-}					t_philo;
-
 typedef struct		s_all
 {
-	int				philo_num;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				eat_count;
-	t_philo			*philos;
-	t_table			table;
+	int				simul_start;
+	int				tag;
+	int				last_lunch;
+	int				eat_num;
+	t_table			*table;
 }					t_all;
 
 /*

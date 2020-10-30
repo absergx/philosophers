@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/30 17:18:45 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/30 20:24:22 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,39 +34,25 @@
 **		- Each philosopher should be a thread.
 */
 
-void	ft_print_args(t_all *all)
+void	ft_print_args(t_table *table)
 {
-	printf(GREEN"num_philos = %d\n", all->philo_num);
-	printf("time to die = %d\n", all->time_to_die);
-	printf("time to eat = %d\n", all->time_to_eat);
-	printf("time to sleep = %d\n"ENDCOLOR, all->time_to_sleep);
-	if (all->eat_count > 0)
-		printf(GREEN"eat count = %d\n"ENDCOLOR, all->eat_count);
+	printf(GREEN"num_philos = %d\n", table->philo_num);
+	printf("time to die = %d\n", table->time_to_die);
+	printf("time to eat = %d\n", table->time_to_eat);
+	printf("time to sleep = %d\n"ENDCOLOR, table->time_to_sleep);
+	if (table->eat_count > 0)
+		printf(GREEN"eat count = %d\n"ENDCOLOR, table->eat_count);
 }
 
-void	ft_table_init(t_table *table, int size)
+void	ft_table_init(t_table *table)
 {
 	int				i;
-	pthread_mutex_t	forks[size];
+	pthread_mutex_t	forks[table->philo_num];
 
 	i = -1;
 	table->forks = forks;
-	while (++i < size)
+	while (++i < table->philo_num)
 		pthread_mutex_init(&table->forks[i], NULL);
-}
-
-void	ft_philos_init(t_all *all)
-{
-	int				i;
-	t_philo			philos[all->philo_num];
-
-	i = -1;
-	all->philos = philos;
-	while (++i < all->philo_num)
-	{
-		all->philos[i].tag = i + 1;
-		all->philos[i].eat_num = 0;
-	}
 }
 
 /*
@@ -79,12 +65,13 @@ void	ft_philos_init(t_all *all)
 int		main(int argc, char **argv)
 {
 	t_all			all;
+	t_table			table;
 
-	ft_init(&all);
-	if (ft_parse(argc, argv, &all))
+	ft_init(&table);
+	if (ft_parse(argc, argv, &table))
 		return (1);
-	ft_print_args(&all); // TEMP
-	ft_table_init(&all.table, all.philo_num);
-	free(all.table.forks);
+	ft_print_args(&table); // TEMP
+	ft_table_init(&table);
+	all.table = &table;
 	return (0);
 }
