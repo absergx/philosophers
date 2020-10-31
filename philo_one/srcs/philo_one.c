@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/31 14:00:11 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/31 19:38:23 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@
 **		- To avoid philosophers duplicating forks, you should protect the \
 **		forks state with a mutex for each of them.
 **		- Each philosopher should be a thread.
-**
-**	Forks handling:
-**		pthread_mutex_lock(&all->table.fork[i])
-**		pthread_mutex_lock(&all->table.fork[(i + 1) % all->philo_num])
-**	блокировка двух вилок с учетом, что последний берет первую вилку
 */
 
 void	init_n_start_threads(t_table *table)
@@ -44,13 +39,13 @@ void	init_n_start_threads(t_table *table)
 	int						i;
 	t_philo					philos[table->philo_num];
 	pthread_t				threads[table->philo_num];
-	
+
 	i = -1;
 	while (++i < table->philo_num)
 	{
-		philos->tag = i;
-		philos->table = table;
-		philos->eat_count = table->eat_count;
+		philos[i].tag = i;
+		philos[i].table = table;
+		philos[i].eat_count = table->eat_count;
 		pthread_create(&threads[i], NULL, simulation, &philos[i]);
 	}
 	i = -1;
@@ -70,6 +65,7 @@ void	ft_table_init(t_table *table)
 	static pthread_mutex_t	time_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 	i = -1;
+	table->died = 0;
 	table->forks = forks;
 	while (++i < table->philo_num)
 		pthread_mutex_init(&table->forks[i], NULL);

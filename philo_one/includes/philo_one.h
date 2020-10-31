@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:23:51 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/31 15:04:04 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/31 20:26:16 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 # include <sys/time.h>
 # include <stdlib.h>
 
+# define MAGENTA "\033[35m"
 # define RED "\033[38;5;160m"
+# define BLUE "\033[34m"
+# define YELLOW "\033[33m"
 # define ENDCOLOR "\033[0m"
 # define GREEN "\033[38;5;46m"
 

@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:59:30 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/31 15:06:01 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/31 20:26:28 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		handle_forks(t_philo *philo, int l_fork, int r_fork)
 		pthread_mutex_unlock(&philo->table->forks[l_fork]);
 		return (1);
 	}
-	print_message(philo, "has taken a fork\n");
+	print_message(philo, MAGENTA"has taken a fork\n"ENDCOLOR);
 	if (philo->table->philo_num == 1)
 	{
 		while (!philo->table->died)
@@ -34,7 +34,7 @@ int		handle_forks(t_philo *philo, int l_fork, int r_fork)
 		pthread_mutex_unlock(&philo->table->forks[r_fork]);
 		return (1);
 	}
-	print_message(philo, "has taken a fork\n");
+	print_message(philo, MAGENTA"has taken a fork\n"ENDCOLOR);
 	return (0);
 }
 
@@ -55,7 +55,7 @@ void	get_forks(t_philo *philo)
 		pthread_mutex_unlock(&philo->table->forks[r_fork]);
 		return ;
 	}
-	print_message(philo, "is eating\n");
+	print_message(philo, GREEN"is eating\n"ENDCOLOR);
 	philo->eat_count -= 1;
 	pthread_mutex_lock(&philo->table->time_mutex);
 	philo->last_lunch = get_time();
@@ -86,7 +86,7 @@ void	*is_dead(void *ptr)
 		pthread_mutex_unlock(&philo->table->death_mutex);
 		return (NULL);
 	}
-	print_message(philo, "is died\n");
+	print_message(philo, RED"is died\n"ENDCOLOR);
 	philo->table->died = 1;
 	pthread_mutex_unlock(&philo->table->death_mutex);
 	return (NULL);
@@ -108,11 +108,11 @@ void	*simulation(void *ptr)
 		get_forks(philo);
 		if (philo->table->died)
 			break ;
-		print_message(philo, "is sleeping\n");
+		print_message(philo, BLUE"is sleeping\n"ENDCOLOR);
 		ft_wait(philo->table->time_to_sleep);
 		if (philo->table->died)
 			break ;
-		print_message(philo, "is thinking\n");
+		print_message(philo, YELLOW"is thinking\n"ENDCOLOR);
 	}
 	pthread_join(death_time, NULL);
 	return (NULL);

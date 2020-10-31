@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:59:40 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/31 15:03:41 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/31 19:31:22 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ void	ft_wait(int time)
 int		get_time(void)
 {
 	struct timeval	current;
-	int				res;
 
 	gettimeofday(&current, NULL);
-	res = (int)((current.tv_sec * 1000) + (current.tv_sec / 1000));
-	return (res);
+	return ((int)(((current.tv_sec) * 1000) + ((current.tv_usec) / 1000)));
 }
