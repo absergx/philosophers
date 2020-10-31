@@ -6,11 +6,36 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:21:00 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/30 20:39:24 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/31 14:56:03 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+char	*ft_itoa_u(unsigned long n)
+{
+	unsigned long	tmp;
+	char			*res;
+	size_t			len;
+
+	len = 1;
+	tmp = n;
+	while (tmp >= 10)
+	{
+		tmp /= 10;
+		++len;
+	}
+	if (!(res = (char *)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	res[len] = '\0';
+	while (len != 0)
+	{
+		res[len - 1] = n % 10 + '0';
+		n /= 10;
+		--len;
+	}
+	return (res);
+}
 
 int		ft_print_error(char *str, char *value)
 {
@@ -33,6 +58,16 @@ int		ft_print_error(char *str, char *value)
 	write(2, "\n", 1);
 	ft_putstr(ENDCOLOR);
 	return (1);
+}
+
+int		ft_strlen(char *str)
+{
+	int		len;
+
+	len = 0;
+	while (str[len])
+		++len;
+	return (len);
 }
 
 void	ft_putstr(char *str)

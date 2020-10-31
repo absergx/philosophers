@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:23:51 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/30 20:40:04 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/31 15:04:04 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ typedef struct		s_table
 	pthread_mutex_t	time_mutex;
 }					t_table;
 
-typedef struct		s_all
+typedef struct		s_philo
 {
-	int				simul_start;
+	long			start_sim;
 	int				tag;
-	int				last_lunch;
-	int				eat_num;
+	long			last_lunch;
+	int				eat_count;
 	t_table			*table;
-}					t_all;
+}					t_philo;
 
 /*
 **		parse.c
@@ -57,8 +57,24 @@ void				ft_init(t_table *table);
 **		utils.c
 */
 
+char				*ft_itoa_u(unsigned long n);
 int					ft_print_error(char *str, char *value);
+int					ft_strlen(char *str);
 void				ft_putstr(char *str);
 int					ft_atou(char *str);
+
+/*
+**		simulation.c
+*/
+
+void				*simulation(void *ptr);
+
+/*
+**		simulation_utils.c
+*/
+
+void				print_message(t_philo *philo, char *str);
+void				ft_wait(int time);
+int					get_time(void);
 
 #endif

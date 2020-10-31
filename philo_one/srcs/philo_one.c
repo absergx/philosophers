@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/30 20:41:07 by memilio          ###   ########.fr       */
+/*   Updated: 2020/10/31 14:00:11 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,37 +39,57 @@
 **	блокировка двух вилок с учетом, что последний берет первую вилку
 */
 
-void	ft_print_args(t_table *table)
+void	init_n_start_threads(t_table *table)
 {
-	printf(GREEN"num_philos = %d\n", table->philo_num);
-	printf("time to die = %d\n", table->time_to_die);
-	printf("time to eat = %d\n", table->time_to_eat);
-	printf("time to sleep = %d\n"ENDCOLOR, table->time_to_sleep);
-	if (table->eat_count > 0)
-		printf(GREEN"eat count = %d\n"ENDCOLOR, table->eat_count);
+	int						i;
+	t_philo					philos[table->philo_num];
+	pthread_t				threads[table->philo_num];
+	
+	i = -1;
+	while (++i < table->philo_num)
+	{
+		philos->tag = i;
+		philos->table = table;
+		philos->eat_count = table->eat_count;
+		pthread_create(&threads[i], NULL, simulation, &philos[i]);
+	}
+	i = -1;
+	while (++i < table->philo_num)
+		pthread_join(threads[i], NULL);
+	i = -1;
+	while (++i < table->philo_num)
+		pthread_mutex_destroy(&table->forks[i]);
 }
 
 void	ft_table_init(t_table *table)
 {
-	int				i;
-	pthread_mutex_t	forks[table->philo_num];
+	int						i;
+	pthread_mutex_t			forks[table->philo_num];
+	static pthread_mutex_t	death_mutex = PTHREAD_MUTEX_INITIALIZER;
+	static pthread_mutex_t	output_mutex = PTHREAD_MUTEX_INITIALIZER;
+	static pthread_mutex_t	time_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 	i = -1;
 	table->forks = forks;
 	while (++i < table->philo_num)
 		pthread_mutex_init(&table->forks[i], NULL);
+	table->forks = forks;
+	table->output_mutex = output_mutex;
+	table->time_mutex = time_mutex;
+	table->death_mutex = death_mutex;
+	init_n_start_threads(table);
+	pthread_mutex_destroy(&death_mutex);
+	pthread_mutex_destroy(&time_mutex);
+	pthread_mutex_destroy(&output_mutex);
 }
 
 int		main(int argc, char **argv)
 {
-	t_all			all;
-	t_table			table;
+	t_table					table;
 
 	ft_init(&table);
 	if (ft_parse(argc, argv, &table))
 		return (1);
-	ft_print_args(&table); // TEMP
 	ft_table_init(&table);
-	all.table = &table;
 	return (0);
 }
