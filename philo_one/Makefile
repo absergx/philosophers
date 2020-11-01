@@ -6,7 +6,7 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/25 15:21:21 by memilio           #+#    #+#              #
-#    Updated: 2020/10/31 14:04:56 by memilio          ###   ########.fr        #
+#    Updated: 2020/11/01 17:07:36 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ CFLAGS		=	-Wall -Wextra -Werror -g
 INCLUDES	=	-I./includes/
 FOLDER_SRCS	=	./srcs/
 FUNC		=	philo_one \
-				parse \
 				utils \
 				simulation \
 				simulation_utils
@@ -43,5 +42,5 @@ fclean: clean
 re: fclean all
 
 norme:
-	norminette ./includes
-	norminette ./srcs
+	@norminette ./includes
+	@norminette ./srcs

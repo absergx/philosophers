@@ -6,11 +6,11 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:35:02 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/31 19:45:07 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/01 17:06:27 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_two.h"
 
 void	ft_init(t_table *table)
 {

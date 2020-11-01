@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.h                                        :+:      :+:    :+:   */
+/*   philo_two.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:23:51 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/01 17:07:49 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/01 17:13:20 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_ONE_H
-# define PHILO_ONE_H
+#ifndef PHILO_TWO_H
+# define PHILO_TWO_H
 
 # include <stdio.h>
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
 # include <stdlib.h>
+# include <semaphore.h>
 
 # define MAGENTA "\033[35m"
 # define RED "\033[38;5;160m"
@@ -34,10 +35,6 @@ typedef struct		s_table
 	int				time_to_sleep;
 	int				eat_count;
 	int				died;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	death_mutex;
-	pthread_mutex_t	output_mutex;
-	pthread_mutex_t	time_mutex;
 }					t_table;
 
 typedef struct		s_philo
@@ -50,12 +47,20 @@ typedef struct		s_philo
 }					t_philo;
 
 /*
+**		parse.c
+*/
+
+int					ft_parse(int argc, char **argv, t_table *table);
+void				ft_init(t_table *table);
+
+/*
 **		utils.c
 */
 
 char				*ft_itoa_u(unsigned long n);
 int					ft_print_error(char *str, char *value);
 int					ft_strlen(char *str);
+void				ft_putstr(char *str);
 int					ft_atou(char *str);
 
 /*

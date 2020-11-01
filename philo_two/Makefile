@@ -6,7 +6,7 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/25 15:21:21 by memilio           #+#    #+#              #
-#    Updated: 2020/10/31 20:30:26 by memilio          ###   ########.fr        #
+#    Updated: 2020/11/01 16:16:16 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,5 +41,5 @@ fclean: clean
 re: fclean all
 
 norme:
-	norminette ./includes
-	norminette ./srcs
+	@norminette ./includes
+	@norminette ./srcs

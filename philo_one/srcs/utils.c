@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:21:00 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/31 14:56:03 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/01 17:04:51 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		ft_print_error(char *str, char *value)
 	i = 0;
 	while (str[i])
 		++i;
-	ft_putstr(RED);
+	write(2, RED, ft_strlen(RED));
 	write(2, "Error\n", 6);
 	write(2, str, i);
 	if (value)
@@ -56,7 +56,7 @@ int		ft_print_error(char *str, char *value)
 		write(2, value, i);
 	}
 	write(2, "\n", 1);
-	ft_putstr(ENDCOLOR);
+	write(2, ENDCOLOR, ft_strlen(ENDCOLOR));
 	return (1);
 }
 
@@ -68,16 +68,6 @@ int		ft_strlen(char *str)
 	while (str[len])
 		++len;
 	return (len);
-}
-
-void	ft_putstr(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-		++i;
-	write(1, str, i);
 }
 
 int		ft_atou(char *str)
