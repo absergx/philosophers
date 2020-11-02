@@ -6,7 +6,7 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/25 15:21:21 by memilio           #+#    #+#              #
-#    Updated: 2020/11/01 16:16:16 by memilio          ###   ########.fr        #
+#    Updated: 2020/11/02 13:20:34 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ INCLUDES	=	-I./includes/
 FOLDER_SRCS	=	./srcs/
 FUNC		=	philo_two \
 				parse \
-				utils
+				utils \
+				simulation \
+				simulation_utils
 SRC			=	$(addprefix $(FOLDER_SRCS), $(FUNC))
 OBJ			=	$(SRC:=.o)
 

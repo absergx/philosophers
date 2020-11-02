@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:23:51 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/01 17:13:20 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/02 12:43:09 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct		s_table
 	int				time_to_sleep;
 	int				eat_count;
 	int				died;
+	sem_t			*forks;
+	sem_t			*steward;
+	sem_t			*output;
+	sem_t			*time;
+	sem_t			*death;
 }					t_table;
 
 typedef struct		s_philo
