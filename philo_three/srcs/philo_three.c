@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_two.c                                        :+:      :+:    :+:   */
+/*   philo_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/02 17:29:33 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/02 16:53:39 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_two.h"
-
-/*
-**				SEMAPHORES
-**	1. sem_unlink("name") - unlunk old semaphores
-**	2. sem_open("name", O_CREAT, 0660, 1) - open semaphores
-**	3. sem_close(name) - close semaphores (without "")
-**
-**	sem_post - increment semaphore by 1
-**	sem_wait - decrement semaphore by 1
-*/
+#include "philo_three.h"
 
 void	start_threads(t_table *table)
 {
