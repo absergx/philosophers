@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/03 14:58:34 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 17:39:09 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void	init_philo_sem_n_start_process(t_philo *philo, int i)
+static void	init_philo_sem_n_start_process(t_philo *philo, int i)
 {
 	char		*tmp;
 	pid_t		pid;
@@ -37,7 +37,7 @@ void	init_philo_sem_n_start_process(t_philo *philo, int i)
 		philo->table->pid[i] = pid;
 }
 
-void	start_threads(t_table *table)
+static void	start_threads(t_table *table)
 {
 	int			i;
 	pthread_t	eat_thread;
@@ -63,7 +63,7 @@ void	start_threads(t_table *table)
 		kill(table->pid[i], SIGKILL);
 }
 
-int		init_sems_threads(t_table *table)
+static int	init_sems_threads(t_table *table)
 {
 	if ((table->forks = sem_open("forks", O_CREAT, 0660, table->philo_num)) < 0)
 		return (1);
@@ -75,7 +75,7 @@ int		init_sems_threads(t_table *table)
 		return (1);
 	if ((table->time = sem_open("time", O_CREAT, 0660, 1)) < 0)
 		return (1);
-	if ((table->finish = sem_open("finish", O_CREAT, 0660, 1)) < 0)
+	if ((table->finish = sem_open("finish", O_CREAT, 0660, 0)) < 0)
 		return (1);
 	start_threads(table);
 	sem_close(table->forks);
@@ -87,7 +87,7 @@ int		init_sems_threads(t_table *table)
 	return (0);
 }
 
-void	unlink_sems(void)
+static void	unlink_sems(void)
 {
 	sem_unlink("forks");
 	sem_unlink("steward");
@@ -97,7 +97,7 @@ void	unlink_sems(void)
 	sem_unlink("finish");
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_table		table;
 
@@ -106,6 +106,6 @@ int		main(int argc, char **argv)
 		return (1);
 	unlink_sems();
 	if (init_sems_threads(&table))
-		return (ft_print_error("Smth wrong with semaphores", NULL));
+		return (ft_print_error("smth wrong with semaphores", NULL));
 	return (0);
 }

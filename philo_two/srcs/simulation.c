@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 13:04:59 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/02 14:35:50 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 17:44:09 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-int		handle_forks(t_philo *philo)
+static int	handle_forks(t_philo *philo)
 {
 	sem_wait(philo->table->steward);
 	sem_wait(philo->table->forks);
@@ -41,7 +41,7 @@ int		handle_forks(t_philo *philo)
 	return (0);
 }
 
-void	get_forks(t_philo *philo)
+static void	get_forks(t_philo *philo)
 {
 	if (handle_forks(philo))
 		return ;
@@ -61,7 +61,7 @@ void	get_forks(t_philo *philo)
 	sem_post(philo->table->forks);
 }
 
-void	*is_dead(void *ptr)
+static void	*is_dead(void *ptr)
 {
 	t_philo		*philo;
 
@@ -88,7 +88,7 @@ void	*is_dead(void *ptr)
 	return (NULL);
 }
 
-void	*simulation(void *ptr)
+void		*simulation(void *ptr)
 {
 	t_philo		*philo;
 	pthread_t	death_time;

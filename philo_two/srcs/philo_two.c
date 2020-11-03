@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/02 17:29:33 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 17:46:51 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 **	sem_wait - decrement semaphore by 1
 */
 
-void	start_threads(t_table *table)
+static void	start_threads(t_table *table)
 {
 	int			i;
 	pthread_t	threads[table->philo_num];
@@ -43,7 +43,7 @@ void	start_threads(t_table *table)
 			return ;
 }
 
-int		init_sems_threads(t_table *table)
+static int	init_sems_threads(t_table *table)
 {
 	sem_unlink("forks");
 	sem_unlink("steward");
@@ -69,7 +69,7 @@ int		init_sems_threads(t_table *table)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_table		table;
 

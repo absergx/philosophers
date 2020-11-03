@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 13:04:59 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/03 15:12:40 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 17:39:36 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-int		handle_forks(t_philo *philo)
+static int	handle_forks(t_philo *philo)
 {
 	sem_wait(philo->table->steward);
 	sem_wait(philo->table->forks);
@@ -39,7 +39,7 @@ int		handle_forks(t_philo *philo)
 	return (0);
 }
 
-void	get_forks(t_philo *philo)
+static void	get_forks(t_philo *philo)
 {
 	if (handle_forks(philo))
 		return ;
@@ -59,7 +59,7 @@ void	get_forks(t_philo *philo)
 	sem_post(philo->table->forks);
 }
 
-void	*is_dead(void *ptr)
+static void	*is_dead(void *ptr)
 {
 	t_philo		*philo;
 	int			time;
@@ -84,7 +84,14 @@ void	*is_dead(void *ptr)
 	return (NULL);
 }
 
-void	*simulation(void *ptr)
+static void	print_thinking(t_philo *philo)
+{
+	sem_wait(philo->table->output);
+	print_message(philo, YELLOW"is thinking\n"ENDCOLOR);
+	sem_post(philo->table->output);
+}
+
+void		*simulation(void *ptr)
 {
 	t_philo		*philo;
 	pthread_t	death_time;
@@ -106,9 +113,7 @@ void	*simulation(void *ptr)
 		ft_wait(philo->table->time_to_sleep);
 		if (philo->table->died)
 			break ;
-		sem_wait(philo->table->output);
-		print_message(philo, YELLOW"is thinking\n"ENDCOLOR);
-		sem_post(philo->table->output);
+		print_thinking(philo);
 	}
 	pthread_join(death_time, NULL);
 	return (NULL);

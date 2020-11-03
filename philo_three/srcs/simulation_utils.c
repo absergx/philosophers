@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:59:40 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/03 14:53:39 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 17:40:13 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void	*is_hungry(void *ptr)
+void		*is_hungry(void *ptr)
 {
 	t_philo	*philo;
 	int		i;
@@ -28,7 +28,7 @@ void	*is_hungry(void *ptr)
 	return (NULL);
 }
 
-char	*make_message(char *time, char *tag, char *str, int len)
+static char	*make_message(char *time, char *tag, char *str, int len)
 {
 	char	*res;
 	int		i;
@@ -52,7 +52,7 @@ char	*make_message(char *time, char *tag, char *str, int len)
 	return (res);
 }
 
-void	print_message(t_philo *philo, char *str)
+void		print_message(t_philo *philo, char *str)
 {
 	char	*time;
 	char	*tag;
@@ -71,7 +71,7 @@ void	print_message(t_philo *philo, char *str)
 	free(complete_msg);
 }
 
-void	ft_wait(int time)
+void		ft_wait(int time)
 {
 	int				start;
 	int				stop;
@@ -88,7 +88,7 @@ void	ft_wait(int time)
 	}
 }
 
-int		get_time(void)
+int			get_time(void)
 {
 	struct timeval	current;
 

@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:59:30 by memilio           #+#    #+#             */
-/*   Updated: 2020/10/31 20:26:28 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 17:46:23 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int		handle_forks(t_philo *philo, int l_fork, int r_fork)
+static int	handle_forks(t_philo *philo, int l_fork, int r_fork)
 {
 	pthread_mutex_lock(&philo->table->forks[l_fork]);
 	if (philo->table->died)
@@ -38,7 +38,7 @@ int		handle_forks(t_philo *philo, int l_fork, int r_fork)
 	return (0);
 }
 
-void	get_forks(t_philo *philo)
+static void	get_forks(t_philo *philo)
 {
 	int			r_fork;
 	int			l_fork;
@@ -65,7 +65,7 @@ void	get_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->table->forks[r_fork]);
 }
 
-void	*is_dead(void *ptr)
+static void	*is_dead(void *ptr)
 {
 	t_philo		*philo;
 
@@ -92,7 +92,7 @@ void	*is_dead(void *ptr)
 	return (NULL);
 }
 
-void	*simulation(void *ptr)
+void		*simulation(void *ptr)
 {
 	t_philo		*philo;
 	pthread_t	death_time;

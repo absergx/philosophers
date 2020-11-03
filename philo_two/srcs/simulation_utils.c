@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:59:40 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/02 13:17:43 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 17:44:22 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-char	*make_message(char *time, char *tag, char *str, int len)
+static char	*make_message(char *time, char *tag, char *str, int len)
 {
 	char	*res;
 	int		i;
@@ -36,7 +36,7 @@ char	*make_message(char *time, char *tag, char *str, int len)
 	return (res);
 }
 
-void	print_message(t_philo *philo, char *str)
+void		print_message(t_philo *philo, char *str)
 {
 	char	*time;
 	char	*tag;
@@ -62,7 +62,7 @@ void	print_message(t_philo *philo, char *str)
 	sem_post(philo->table->output);
 }
 
-void	ft_wait(int time)
+void		ft_wait(int time)
 {
 	int				start;
 	int				stop;
@@ -79,7 +79,7 @@ void	ft_wait(int time)
 	}
 }
 
-int		get_time(void)
+int			get_time(void)
 {
 	struct timeval	current;
 

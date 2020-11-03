@@ -6,13 +6,13 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/02 21:20:28 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 17:47:07 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void	ft_init(t_table *table)
+static void	ft_init(t_table *table)
 {
 	table->philo_num = 0;
 	table->time_to_die = 0;
@@ -22,7 +22,7 @@ void	ft_init(t_table *table)
 	table->died = 0;
 }
 
-int		ft_parse(int argc, char **argv, t_table *table)
+static int	ft_parse(int argc, char **argv, t_table *table)
 {
 	char	*msg;
 
@@ -49,7 +49,7 @@ int		ft_parse(int argc, char **argv, t_table *table)
 	return (0);
 }
 
-void	init_n_start_threads(t_table *table)
+static void	init_n_start_threads(t_table *table)
 {
 	int						i;
 	t_philo					philos[table->philo_num];
@@ -71,7 +71,7 @@ void	init_n_start_threads(t_table *table)
 		pthread_mutex_destroy(&table->forks[i]);
 }
 
-void	ft_table_init(t_table *table)
+static void	ft_table_init(t_table *table)
 {
 	int						i;
 	pthread_mutex_t			forks[table->philo_num];
@@ -93,7 +93,7 @@ void	ft_table_init(t_table *table)
 	pthread_mutex_destroy(&output_mutex);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_table					table;
 
