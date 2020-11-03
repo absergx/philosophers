@@ -6,13 +6,13 @@
 #    By: memilio <memilio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/25 15:21:21 by memilio           #+#    #+#              #
-#    Updated: 2020/11/02 16:52:44 by memilio          ###   ########.fr        #
+#    Updated: 2020/11/03 18:25:25 by memilio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	philo_three
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror -pthread
 INCLUDES	=	-I./includes/
 FOLDER_SRCS	=	./srcs/
 FUNC		=	philo_three \

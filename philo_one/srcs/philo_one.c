@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/03 17:47:07 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 19:53:07 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static int	ft_parse(int argc, char **argv, t_table *table)
 
 static void	init_n_start_threads(t_table *table)
 {
-	int						i;
-	t_philo					philos[table->philo_num];
-	pthread_t				threads[table->philo_num];
+	int			i;
+	t_philo		philos[table->philo_num];
+	pthread_t	threads[table->philo_num];
 
 	i = -1;
 	while (++i < table->philo_num)
@@ -95,7 +95,7 @@ static void	ft_table_init(t_table *table)
 
 int			main(int argc, char **argv)
 {
-	t_table					table;
+	t_table	table;
 
 	ft_init(&table);
 	if (ft_parse(argc, argv, &table))

@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:20:56 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/03 17:39:09 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 20:19:54 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ static int	init_sems_threads(t_table *table)
 		return (1);
 	if ((table->output = sem_open("output", O_CREAT, 0660, 1)) < 0)
 		return (1);
-	if ((table->time = sem_open("time", O_CREAT, 0660, 1)) < 0)
-		return (1);
 	if ((table->finish = sem_open("finish", O_CREAT, 0660, 0)) < 0)
 		return (1);
 	start_threads(table);
@@ -82,7 +80,6 @@ static int	init_sems_threads(t_table *table)
 	sem_close(table->death);
 	sem_close(table->steward);
 	sem_close(table->output);
-	sem_close(table->time);
 	sem_close(table->finish);
 	return (0);
 }
@@ -93,7 +90,6 @@ static void	unlink_sems(void)
 	sem_unlink("steward");
 	sem_unlink("death");
 	sem_unlink("output");
-	sem_unlink("time");
 	sem_unlink("finish");
 }
 

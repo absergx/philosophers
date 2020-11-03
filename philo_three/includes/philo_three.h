@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:23:51 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/03 15:13:37 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 20:20:06 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct		s_table
 	sem_t			*forks;
 	sem_t			*steward;
 	sem_t			*output;
-	sem_t			*time;
 	sem_t			*death;
 	sem_t			*finish;
 }					t_table;
