@@ -6,7 +6,7 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:23:51 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/02 19:31:07 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 15:13:37 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/time.h>
 # include <stdlib.h>
 # include <semaphore.h>
+# include <signal.h>
 
 # define MAGENTA "\033[35m"
 # define RED "\033[38;5;160m"
@@ -83,6 +84,7 @@ void				*simulation(void *ptr);
 **		simulation_utils.c
 */
 
+void				*is_hungry(void *ptr);
 void				print_message(t_philo *philo, char *str);
 void				ft_wait(int time);
 int					get_time(void);

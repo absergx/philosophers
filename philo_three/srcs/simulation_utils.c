@@ -6,11 +6,27 @@
 /*   By: memilio <memilio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:59:40 by memilio           #+#    #+#             */
-/*   Updated: 2020/11/02 16:55:15 by memilio          ###   ########.fr       */
+/*   Updated: 2020/11/03 14:53:39 by memilio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
+
+void	*is_hungry(void *ptr)
+{
+	t_philo	*philo;
+	int		i;
+
+	philo = (t_philo *)ptr;
+	i = 0;
+	while (i < philo->table->philo_num)
+	{
+		sem_wait(philo[i].end_of_eat);
+		++i;
+	}
+	sem_post(philo->table->finish);
+	return (NULL);
+}
 
 char	*make_message(char *time, char *tag, char *str, int len)
 {
@@ -44,12 +60,6 @@ void	print_message(t_philo *philo, char *str)
 	int		act_time;
 	int		complete_msg_len;
 
-	sem_wait(philo->table->output);
-	if (philo->table->died)
-	{
-		sem_post(philo->table->output);
-		return ;
-	}
 	act_time = get_time() - philo->start_sim;
 	time = ft_itoa_u(act_time);
 	tag = ft_itoa_u(philo->tag + 1);
@@ -59,7 +69,6 @@ void	print_message(t_philo *philo, char *str)
 	free(time);
 	free(tag);
 	free(complete_msg);
-	sem_post(philo->table->output);
 }
 
 void	ft_wait(int time)
